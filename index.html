@@ -16,6 +16,15 @@
         margin-top: 60px;
     }
 
+    link::after{ 
+        color: #3490dc;
+        text-decoration: none;
+    }
+
+    a::after{
+        color: #3490dc;
+    }
+
 </style>
 <body>
     <header>
@@ -25,7 +34,7 @@
             </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal p-1 gap-1 mr-1">
-            <li><a class="text-blue-950" href="#Pagina_Inicial">Pagina Inicial</a></li>
+            <li><a class="text-blue-950 " href="#Pagina_Inicial">Pagina Inicial</a></li>
             <li><a href="#Beneficios">Beneficios</a></li>
             <li><a class="text-blue-800" href="#Como usar">Como usar?</a></li>
             <li><a href="#Planos">Planos</a></li>
@@ -36,25 +45,22 @@
     </div>
 </div>
 </header>
-<div class="grid grid-flow-col grid-rows-1 justify-content-center-safe pt-17.5 ms-10 me-10" id="Pagina_Inicial">
-    <div class="row-span-2 ps-42.5 mt-15">
-        <h1 class="text-info font-bold text-2xl">Sistema de gestão de frota</h1>
-        <h1 class="text-blue-800 font-bold text-4xl">Plataforma completa para<br> o controle e gestão de sua frota</h1>
-        <p class="w-120 text-xl text-gray-800 font-bold leading-8 mt-3">
-            uma solução de software que integra recursos para planejar, monitorar e otimizar a operação de um conjunto de veículos — como caminhões, vans, carros de empresa e equipamentos móveis. O objetivo principal 
+<div class="hero min-h-screen" id="Pagina_Inicial"
+style="background-image: url('https://i.pinimg.com/1200x/81/96/9d/81969d28782cc3f79cd9e9a3c73a3ac4.jpg');">
+<div class="hero-overlay"></div>
+<div class="hero-content text-neutral-content text-center">
+    <div class="max-w-md">
+        <h1 class="mb-5 text-5xl font-bold">Sistema de Gestão de Frotas</h1>
+        <p class="mb-5">
+            Uma solução de software que integra recursos para planejar, monitorar e otimizar a operação de um conjunto de veículos — como caminhões, vans, carros de empresa e equipamentos móveis. O objetivo principal 
             é reduzir custos, aumentar a eficiência, melhorar a segurança e garantir a conformidade com normas e regulamentos.
         </p>
-        <div class="mt-3 pe-35 flex gap-4">
-        <button class="btn btn-md btn-info text-white p-5">Saiber mais</button>
-        <button class="btn btn-md btn-outline btn-info hover:text-white">Assinar serviço</button>
-        </div>
-    </div>
-    <div class="row-span-2 ...">
-        <img src="img/3e5dd295914fd7003f4487fcdc573d8d.jpg" alt="" srcset="">
-    </div>
+    <button class="btn btn-info border-dark text-white delay-150 hover:bg-primary">Começar Agora</button>
+</div>
+</div>
 </div>
 <div class="w-auto h-135 bg-info">
-    <h1 class="text-center text-4xl font-bold text-white mb-10 mt-4 pt-4"><a id="Beneficios"></a>Beneficios do sistema de gestão de frotas</h1>
+    <h1 class="text-center text-4xl font-bold text-white mb-10 pt-4"><a id="Beneficios"></a>Beneficios do sistema de gestão de frotas</h1>
     <div class="grid grid-cols-3 gap-10 ms-20 me-20">
         <div class="card w-96 bg-base-100 shadow-xl">
             <div class="card-body">
@@ -109,7 +115,7 @@
             <div class="card-body">
                 <div class="flex justify-between">
                     <h2 class="text-3xl font-bold text-blue-950">Básico</h2>
-                    <span class="text-xl text">$9/mês</span>
+                    <span class="text-xl text-info">$9/mês</span>
                 </div>
                 <ul class="mt-6 flex flex-col gap-2 text-xs">
                     <li>
