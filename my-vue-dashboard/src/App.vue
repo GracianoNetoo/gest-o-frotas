@@ -10,20 +10,28 @@
       />
       <!-- Main Content -->
       <main class="flex-1 p-6 bg-base-200 dark:bg-backgroundDark">
-        <StatsCards />
-        <Charts />
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <Recents class="lg:col-span-2" />
-          <RecentActivity  />
+        <!-- Dashboard View -->
+        <div v-if="currentView === 'dashboard'">
+          <StatsCards />
+          <Charts />
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <Recents class="lg:col-span-2" />
+            <RecentActivity  />
+          </div>
+          <StackBarChart class="lg:col-span-1 mt-6" />
         </div>
-        <StackBarChart class="lg:col-span-1 mt-6" />
+        
+        <!-- Categories View -->
+        <div v-if="currentView === 'categories'">
+          <AllCategories />
+        </div>
       </main>
     </div>
 
     <div
       class="drawer-side bg-white dark:bg-backgroundDark border border-gray-200 dark:border-primary/10"
     >
-      <Sidebar />
+      <Sidebar @navigate="handleNavigation" />
     </div>
   </div>
 </template>
@@ -36,7 +44,10 @@ import Charts from "./components/Charts.vue";
 import Recents from "./components/Recents.vue";
 import RecentActivity from "./components/RecentActivity.vue";
 import StackBarChart from "./components/StackBarChart.vue";
+import AllCategories from "./components/AllCategories.vue";
+
 const isDark = ref(true);
+const currentView = ref('dashboard');
 
 onMounted(() => {
   const savedTheme = localStorage.getItem("theme");
@@ -69,6 +80,17 @@ const toggleDrawer = () => {
   const drawer = document.getElementById("my-drawer");
   if (drawer) {
     drawer.checked = !drawer.checked;
+  }
+};
+
+const handleNavigation = (view) => {
+  currentView.value = view;
+  // Fechar drawer em mobile após navegação
+  if (window.innerWidth < 1024) {
+    const drawer = document.getElementById("my-drawer");
+    if (drawer) {
+      drawer.checked = false;
+    }
   }
 };
 </script>

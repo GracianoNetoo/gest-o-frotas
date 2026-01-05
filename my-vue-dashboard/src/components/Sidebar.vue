@@ -24,7 +24,7 @@
           :aria-expanded="!!link.children && link.open"
           :aria-haspopup="!!link.children"
           :class="{ active: link.active }"
-          @click="setActive(index)"
+          @click="handleMainClick(index, link)"
           class="flex items-center w-full text-left hover:bg-gray-100 dark:hover:bg-white/10 text-black dark:text-white"
         >
           <Icon :icon="link.icon" class="h-5 w-5" />
@@ -49,7 +49,7 @@
           >
             <a
               href="#"
-              @click.prevent
+              @click.prevent="handleChildClick(child.name)"
               class="block py-1 hover:bg-gray-100 dark:hover:bg-white/10"
             >
               {{ child.name }}
@@ -130,15 +130,47 @@ const links = ref([
   },
 ]);
 
-const setActive = (index) => {
+const emit = defineEmits(['navigate']);
+
+const handleMainClick = (index, link) => {
+  // Se não tem filhos, navega diretamente
+  if (!link.children) {
+    const viewMap = {
+      'Dashboard': 'dashboard',
+      'Rotas': 'routes',
+      'Combustível': 'fuel',
+      'Relatórios': 'reports',
+      'Configurações': 'settings'
+    };
+    const view = viewMap[link.name] || 'dashboard';
+    emit('navigate', view);
+  }
+  
   //Toggle open state for items with children
-  if (links.value[index].children) {
-    links.value[index].open = !links.value[index].open;
+  if (link.children) {
+    link.open = !link.open;
   }
 
   //Set Active state
-  links.value.forEach((link, i) => {
-    link.active = i === index;
+  links.value.forEach((l, i) => {
+    l.active = i === index;
   });
+};
+
+const handleChildClick = (childName) => {
+  const viewMap = {
+    'Categorias': 'categories',
+    'Todos os Veículos': 'vehicles',
+    'Adicionar Veículo': 'add-vehicle',
+    'Todos os Motoristas': 'drivers',
+    'Adicionar Motorista': 'add-driver',
+    'Licenças': 'licenses',
+    'Agendadas': 'scheduled-maintenance',
+    'Em Andamento': 'ongoing-maintenance',
+    'Histórico': 'maintenance-history'
+  };
+  
+  const view = viewMap[childName] || 'dashboard';
+  emit('navigate', view);
 };
 </script>
