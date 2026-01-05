@@ -27,7 +27,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="card-actions justify-end mt-4">
+                <div class="card-actions justify-start mt-6">
                     <button @click="viewAllVehicles" class="btn btn-primary">
                         Ver Todos os Veículos
                         <Icon icon="line-md:arrow-right" class="w-4 h-4 ml-1"/>
