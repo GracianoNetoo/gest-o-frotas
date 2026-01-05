@@ -38,13 +38,13 @@ const stackedBarData = ref({
       label: "Vans",
       data: [32, 35, 38, 36, 40, 42],
       backgroundColor: '#463581',
-      stack: 'Stack 1'
+      stack: 'Stack 0'
     },
     {
       label: "Carros",
       data: [28, 30, 32, 31, 33, 35],
       backgroundColor: '#ECE852',
-      stack: 'Stack 2'
+      stack: 'Stack 0'
     }
   ]
 })
