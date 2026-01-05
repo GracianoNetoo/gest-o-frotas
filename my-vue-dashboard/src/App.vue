@@ -16,14 +16,22 @@
           <Charts />
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <Recents class="lg:col-span-2" />
-            <RecentActivity  />
+            <RecentActivity />
           </div>
           <StackBarChart class="lg:col-span-1 mt-6" />
         </div>
-        
+
         <!-- Categories View -->
         <div v-if="currentView === 'categories'">
           <AllCategories />
+        </div>
+        <!-- Vehicles View -->
+        <div v-if="currentView === 'vehicles'">
+          <Vehicles @navigate="handleNavigation" />
+        </div>
+        <!-- AddVehicles View -->
+        <div v-if="currentView === 'add-vehicle' || currentView === 'addvehicles'">
+          <AddVehicles @navigate="handleNavigation" />
         </div>
       </main>
     </div>
@@ -45,9 +53,11 @@ import Recents from "./components/Recents.vue";
 import RecentActivity from "./components/RecentActivity.vue";
 import StackBarChart from "./components/StackBarChart.vue";
 import AllCategories from "./components/AllCategories.vue";
+import Vehicles from "./components/Vehicles.vue";
+import AddVehicles from "./components/AddVehicles.vue";
 
 const isDark = ref(true);
-const currentView = ref('dashboard');
+const currentView = ref("dashboard");
 
 onMounted(() => {
   const savedTheme = localStorage.getItem("theme");
