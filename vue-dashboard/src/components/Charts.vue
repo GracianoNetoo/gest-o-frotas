@@ -52,8 +52,8 @@ const revenuChartData = ref({
       data: [12000, 19000, 30000, 25000, 50000, 60000],
       fill: false,
       borderWidth: 2,
-      borderColor: '#E82561',
-      backgroundColor: '#E82561',
+      borderColor: '#008BFF',
+      backgroundColor: '#008BFF',
       tension: 0.6,
     }]
 })
@@ -65,7 +65,7 @@ const doughnutChartData = ref({
   ],
   datasets: [{
       data: [82, 45, 12],
-      backgroundColor: ['#463581', '#E82561', '#ECE852'],
+      backgroundColor: ['#008BFF', '#3a0ca3', '#FFB200'],
       borderWidth: 0,
       hoverOffset: 10
     }]

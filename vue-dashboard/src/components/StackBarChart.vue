@@ -4,7 +4,7 @@
         <Bar
           :data="stackedBarData"
           :options="stackedBarOptions"
-          class="max-h-100"
+          class="max-h-80"
         />
     </div>
 </template>
@@ -31,19 +31,19 @@ const stackedBarData = ref({
     {
       label: "Caminhões",
       data: [45, 48, 52, 50, 55, 58],
-      backgroundColor: '#E82561',
+      backgroundColor: '#008BFF',
       stack: 'Stack 0'
     },
     {
       label: "Vans",
       data: [32, 35, 38, 36, 40, 42],
-      backgroundColor: '#463581',
+      backgroundColor: '#3a0ca3',
       stack: 'Stack 0'
     },
     {
       label: "Carros",
       data: [28, 30, 32, 31, 33, 35],
-      backgroundColor: '#ECE852',
+      backgroundColor: '#FFB200',
       stack: 'Stack 0'
     }
   ]

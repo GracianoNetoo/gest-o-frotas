@@ -28,7 +28,7 @@
                     </tbody>
                 </table>
                 <div class="card-actions justify-start mt-6">
-                    <button @click="viewAllVehicles" class="btn btn-primary">
+                    <button @click="viewAllVehicles" class="btn bg-blue-500 hover:bg-blue-900 text-white">
                         Ver Todos os Veículos
                         <Icon icon="line-md:arrow-right" class="w-4 h-4 ml-1"/>
                     </button>
@@ -60,10 +60,10 @@ function getStatusClass(status){
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR', { 
-        day: '2-digit', 
-        month: '2-digit', 
-        year: 'numeric' 
+    return date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
     });
 };
 

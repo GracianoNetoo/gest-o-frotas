@@ -50,9 +50,9 @@
           tabindex="0"
           class="mt-5 z-1 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-58 space-y-3 dark:bg-backgroundDark"
         >
-          <li><a>Profile</a></li>
-          <li><a>Settings</a></li>
-          <li><a>Logout</a></li>
+          <li><a>Perfil</a></li>
+          <li><a>Configurações</a></li>
+          <li><a>Terminar sessão</a></li>
         </ul>
       </div>
     </section>

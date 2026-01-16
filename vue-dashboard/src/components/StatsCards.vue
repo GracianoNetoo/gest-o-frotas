@@ -24,10 +24,10 @@
 <script setup>
 import { ref } from "vue";
 const statsData = ref([
-  { title: "Total de Veículos", value: "156", desc: "↗ 5% desde o mês passado" },
-  { title: "Veículos em Uso", value: "128", desc: "↗ 8% desde o mês passado" },
-  { title: "Manutenções Pendentes", value: "12", desc: "↙ 3% desde o mês passado" },
-  { title: "Motoristas Ativos", value: "89", desc: "↗ 2% desde o mês passado" },
+  { title: "Total de Veículos", value: "100", desc: "↗ 5% desde o mês passado" },
+  { title: "Veículos em Uso", value: "60", desc: "↗ 8% desde o mês passado" },
+  { title: "Manutenções Pendentes", value: "40", desc: "↙ 3% desde o mês passado" },
+  { title: "Motoristas Ativos", value: "55", desc: "↗ 2% desde o mês passado" },
 ]);
 
 const isPositive = (desc) => {

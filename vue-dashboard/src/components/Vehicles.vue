@@ -8,19 +8,19 @@
                     Adicionar Veículo
                 </button>
             </div>
-            
+
             <!-- Filtros -->
             <div class="flex flex-wrap gap-4 mb-4">
                 <div class="form-control">
-                    <input 
-                        type="text" 
-                        v-model="searchQuery" 
-                        placeholder="Buscar por placa, modelo ou motorista..." 
+                    <input
+                        type="text"
+                        v-model="searchQuery"
+                        placeholder="Buscar por placa, modelo ou motorista..."
                         class="input input-bordered w-full max-w-xs dark:bg-white/5 dark:border-white/10"
                     />
                 </div>
-                <select 
-                    v-model="statusFilter" 
+                <select
+                    v-model="statusFilter"
                     class="select select-bordered dark:bg-white/5 dark:border-white/10"
                 >
                     <option value="">Todos os Status</option>
@@ -29,8 +29,8 @@
                     <option value="Manutenção">Manutenção</option>
                     <option value="Indisponível">Indisponível</option>
                 </select>
-                <select 
-                    v-model="categoryFilter" 
+                <select
+                    v-model="categoryFilter"
                     class="select select-bordered dark:bg-white/5 dark:border-white/10"
                 >
                     <option value="">Todas as Categorias</option>
@@ -40,7 +40,7 @@
                     <option value="Motocicletas">Motocicletas</option>
                 </select>
             </div>
-            
+
             <div class="overflow-x-auto">
                 <table class="table">
                     <thead>
@@ -77,22 +77,22 @@
                             <td>{{ formatDate(vehicle.lastMaintenance) }}</td>
                             <td>
                                 <div class="flex gap-2">
-                                    <button 
-                                        @click="editVehicle(index)" 
+                                    <button
+                                        @click="editVehicle(index)"
                                         class="btn btn-ghost btn-xs"
                                         title="Editar"
                                     >
                                         <Icon icon="line-md:edit" class="w-4 h-4"/>
                                     </button>
-                                    <button 
-                                        @click="viewDetails(index)" 
+                                    <button
+                                        @click="viewDetails(index)"
                                         class="btn btn-ghost btn-xs"
                                         title="Detalhes"
                                     >
                                         <Icon icon="line-md:eye" class="w-4 h-4"/>
                                     </button>
-                                    <button 
-                                        @click="deleteVehicle(index)" 
+                                    <button
+                                        @click="deleteVehicle(index)"
                                         class="btn btn-ghost btn-xs text-error"
                                         title="Excluir"
                                     >
@@ -104,7 +104,7 @@
                     </tbody>
                 </table>
             </div>
-            
+
             <!-- Paginação -->
             <div class="flex justify-center mt-6">
                 <div class="join">
@@ -148,31 +148,31 @@ const vehicles = ref([
 
 const filteredVehicles = computed(() => {
     let filtered = vehicles.value;
-    
+
     // Filtro de busca
     if (searchQuery.value) {
         const query = searchQuery.value.toLowerCase();
-        filtered = filtered.filter(v => 
+        filtered = filtered.filter(v =>
             v.plate.toLowerCase().includes(query) ||
             v.model.toLowerCase().includes(query) ||
             (v.driver && v.driver.toLowerCase().includes(query))
         );
     }
-    
+
     // Filtro de status
     if (statusFilter.value) {
         filtered = filtered.filter(v => v.status === statusFilter.value);
     }
-    
+
     // Filtro de categoria
     if (categoryFilter.value) {
         filtered = filtered.filter(v => v.category === categoryFilter.value);
     }
-    
+
     // Paginação
     const start = (currentPage.value - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    
+
     return filtered.slice(start, end);
 });
 
@@ -192,10 +192,10 @@ function getStatusClass(status) {
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR', { 
-        day: '2-digit', 
-        month: '2-digit', 
-        year: 'numeric' 
+    return date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
     });
 };
 
