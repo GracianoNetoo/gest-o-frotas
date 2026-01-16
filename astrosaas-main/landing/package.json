@@ -1,0 +1,23 @@
+{
+  "name": "meu-projeto-astro",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/vue": "^5.1.4",
+    "@astrolib/seo": "^1.0.0-beta.8",
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.19",
+    "astro": "^5.16.9",
+    "lucide-astro": "^0.556.0",
+    "vue": "^3.5.26"
+  }
+}
