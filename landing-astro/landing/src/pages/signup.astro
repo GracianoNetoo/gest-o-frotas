@@ -15,82 +15,103 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
           variant="displaySM"
           class="tracking-tight font-semibold text-base-900"
         >
-          Join our community
+          Crie sua conta logística
         </Text>
         <Text
           tag="p"
           variant="textBase"
-          class="mt-4 text-base-500 font-medium text-balance"
+          class="mt-2 text-base-500 font-medium text-balance"
         >
-          Sign up to join our community and start building your brand.
+          Comece a centralizar seus veículos, rotas e custos em poucos minutos.
         </Text>
-        <form action="#" method="POST" class="mx-auto mt-12">
-          <div class="flex flex-col gap-y-6">
+
+        <form action="#" method="POST" class="mx-auto mt-8">
+          <div class="flex flex-col gap-y-5">
             <div>
-              <label class="text-sm text-base-500 font-medium">
-                First name
-              </label>
-              <div class="mt-2.5">
+              <label class="text-sm text-base-500 font-medium">Nome completo</label>
+              <div class="mt-1.5">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
-                  autocomplete="given-name"
+                  name="full-name"
+                  id="full-name"
+                  placeholder="Ex: João Silva"
                   required
-                  aria-required="true"
-                  aria-describedby="first-name-error"
-                  class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 placeholder-base-400 focus:border-base-300 focus:bg-transparent focus:outline-none focus:ring-accent-700 focus:ring-offset-2 focus:ring-2 sm:text-sm"
+                  class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 placeholder-base-400 focus:ring-accent-700 focus:outline-none focus:ring-2 sm:text-sm"
                 />
-                <span id="first-name-error" class="text-red-600 text-sm hidden">
-                  Please enter your first name.
-                </span>
               </div>
             </div>
+
             <div>
-              <label class="text-sm text-base-500 font-medium"> Email </label>
-              <div class="mt-2.5">
+              <label class="text-sm text-base-500 font-medium">Email corporativo</label>
+              <div class="mt-1.5">
                 <input
                   type="email"
                   name="email"
                   id="email"
-                  autocomplete="email"
+                  placeholder="joao@empresa.com.br"
                   required
-                  aria-required="true"
-                  aria-describedby="email-error"
-                  class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 placeholder-base-400 focus:border-base-300 focus:bg-transparent focus:outline-none focus:ring-accent-700 focus:ring-offset-2 focus:ring-2 sm:text-sm"
+                  class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 placeholder-base-400 focus:ring-accent-700 focus:outline-none focus:ring-2 sm:text-sm"
                 />
-                <span id="email-error" class="text-red-600 text-sm hidden">
-                  Please enter a valid email address.
-                </span>
+              </div>
+            </div>
+
+            <div>
+              <label class="text-sm text-base-500 font-medium">Nome da Transportadora/Empresa</label>
+              <div class="mt-1.5">
+                <input
+                  type="text"
+                  name="company-name"
+                  id="company-name"
+                  placeholder="Ex: Logística Avançada LTDA"
+                  required
+                  class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 placeholder-base-400 focus:ring-accent-700 focus:outline-none focus:ring-2 sm:text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="text-sm text-base-500 font-medium">Quantidade de veículos</label>
+              <div class="mt-1.5">
+                <select
+                  name="fleet-size"
+                  id="fleet-size"
+                  required
+                  class="block w-full h-10 px-4 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 focus:ring-accent-700 focus:outline-none focus:ring-2 sm:text-sm"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="1-5">1 a 5 veículos</option>
+                  <option value="6-20">6 a 20 veículos</option>
+                  <option value="21-50">21 a 50 veículos</option>
+                  <option value="50+">Mais de 50 veículos</option>
+                </select>
               </div>
             </div>
           </div>
-          <div class="flex items-center mt-4 gap-3">
+
+          <div class="flex items-start mt-6 gap-3">
             <input
               id="agreement"
               name="agreement"
               type="checkbox"
-              class="size-4 rounded border-base-300 text-accent-600 focus:ring-accent-600 shadow"
+              required
+              class="size-4 mt-0.5 rounded border-base-300 text-accent-600 focus:ring-accent-600 shadow"
             />
-            <label class="undefined block text-sm text-base-500">
-              You agree to our
-              <a class="text-accent-700 hover:text-base-500" href="#_">
-                Terms of service
-              </a>
-              and
-              <a class="t text-accent-700 hover:text-base-500" href="#_">
-                Privacy Policy
-              </a>
+            <label class="block text-xs text-base-500 leading-normal">
+              Declaro que li e aceito os 
+              <a class="text-accent-700 hover:underline" href="#_">Termos de Serviço</a> 
+              e a <a class="text-accent-700 hover:underline" href="#_">Política de Privacidade</a> da plataforma de gestão.
             </label>
           </div>
+
           <Button variant="default" size="base" class="mt-8 w-full">
-            Sign up
+            Criar conta de gestor
           </Button>
-          <div class="flex items-center mt-4">
+
+          <div class="flex justify-center mt-6">
             <Text tag="p" variant="textSM" class="text-base-500">
-              Don't have an account? Already have an account?
-              <a class="text-accent-700 hover:text-base-500" href="/login">
-                Sign in
+              Já possui uma frota cadastrada? 
+              <a class="text-accent-700 font-semibold hover:text-base-900 ml-1" href="/login">
+                Fazer login
               </a>
             </Text>
           </div>

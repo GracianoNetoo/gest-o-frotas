@@ -8,9 +8,9 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import Burger from "@/components/fundations/icons/Burger.astro";
 import Close from "@/components/fundations/icons/Close.astro";
 const navItems = [
-  { href: "#features", text: "Features" },
-  { href: "#pricing", text: "Pricing" },
-  { href: "#faq", text: "Faq" },
+  { href: "#features", text: "Beneficios" },
+  { href: "#pricing", text: "Preços" },
+  { href: "#faq", text: "Perguntas" },
 ];
 ---
 
@@ -21,7 +21,7 @@ const navItems = [
     >
       <div class="flex flex-row items-center justify-between lg:justify-start">
         <a href="/">
-          <Logo class="textBase font-medium" />
+        <Logo class="text-black font-bold text-[25px]" />
         </a>
         <button
           id="nav-toggle"
@@ -51,11 +51,11 @@ const navItems = [
         </div>
         <div class="flex flex-col md:flex-row items-center gap-2">
           <Button
-            variant="muted"
+            variant="default"
             size="sm"
             isLink
             href="/signup"
-            class="w-full md:w-fit">Sign up</Button
+            class="w-full md:w-fit bg-black hover:bg-white hover:text-black">Cadastrar</Button
           >
           <Button
             variant="default"
@@ -64,7 +64,7 @@ const navItems = [
             href="/login"
             class="w-full md:w-fit"
           >
-            Log in</Button
+            Conecte-se</Button
           >
         </div>
       </nav>

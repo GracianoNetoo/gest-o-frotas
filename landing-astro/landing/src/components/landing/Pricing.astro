@@ -7,21 +7,21 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import Check from "@/components/fundations/icons/Check.astro";
 const pricingTiers = [
   {
-    name: "Core",
-    subtitle: "For small teams and founders",
+    name: "Essencial",
+    subtitle: "Para frotas locais e autônomos",
     description:
-      "Everything you need to centralize leads, keep follow-ups on time, and stay organized.",
-    monthlyPrice: "$29.00",
-    annualPrice: "$19.00",
+      "Tudo o que você precisa para centralizar veículos, acompanhar rotas e manter sua frota organizada.",
+    monthlyPrice: "R$ 29,00",
+    annualPrice: "R$ 19,00",
     features: [
-      "Up to 1,500 contacts across 2 pipelines",
-      "Kanban board with stage automations",
-      "Gmail/Outlook and calendar sync",
-      "Tasks, reminders, and SLA timers",
-      "Standard reports and exports",
-      "Email and community support",
+      "Até 50 veículos cadastrados",
+      "Sistema de rotas disponíveis",
+      "Sincronização com Gmail/Outlook e calendário",
+      "Tarefas, lembretes e temporizadores de SLA",
+      "Relatórios padrão e exportações",
+      "E-mail e suporte da comunidade",
     ],
-    cta: "Start Core",
+    cta: "Iniciar Essencial",
     buttonVariant: "default",
     isPopular: false,
     bgClass: "bg-base-50 ring-4 ring-base-50",
@@ -30,44 +30,45 @@ const pricingTiers = [
     descClass: "text-base-500",
   },
   {
-    name: "Momentum",
-    subtitle: "For scaling revenue teams",
+    name: "Performance",
+    subtitle: "Para frotas em crescimento",
     description:
-      "Automation, shared inbox, and forecasting to keep every deal moving across the team.",
-    monthlyPrice: "$49.00",
-    annualPrice: "$39.00",
+      "Automação de custos, caixa compartilhado e previsão para manter cada veículo rodando com lucro.",
+    monthlyPrice: "R$ 49,00",
+    annualPrice: "R$ 39,00",
     features: [
-      "Up to 15,000 contacts and 5 pipelines",
-      "Automation workflows and sequences",
-      "Shared inbox with collision detection",
-      "Custom fields, views, and dashboards",
-      "Forecasting and revenue analytics",
-      "API, webhooks, and priority support",
+      "Até 150 veículos e 5 pipelines de carga",
+      "Workflows de automação e sequências",
+      "Caixa compartilhado com detecção de conflitos",
+      "Campos, visualizações e dashboards personalizados",
+      "Previsão de manutenção e análise de receita",
+      "API, webhooks e suporte prioritário",
     ],
-    cta: "Upgrade to Momentum",
-    buttonVariant: "muted",
+    cta: "Upgrade para Performance",
+    buttonVariant: "default",
     isPopular: true,
-    bgClass: "bg-accent-950 ring-4 ring-accent-50",
+    bgClass: "bg-accent-800 ring-4 ring-accent-50",
     textClass: "text-white",
     priceClass: "text-white",
-    descClass: "text-base-200",
+    descClass: "text-neutral-300",
   },
+
   {
-    name: "Growth",
-    subtitle: "For established sales orgs",
+    name: "Enterprise",
+    subtitle: "Para grandes transportadoras",
     description:
-      "Enterprise-ready controls with dedicated guidance for complex, multi-team pipelines.",
-    monthlyPrice: "$99.00",
-    annualPrice: "$79.00",
+      "Controles prontos para o nível corporativo com suporte dedicado para operações logísticas complexas.",
+    monthlyPrice: "R$ 99,00",
+    annualPrice: "R$ 79,00",
     features: [
-      "Unlimited contacts, pipelines, and seats",
-      "Advanced permissions and SSO",
-      "Two-way data syncs and enrichment",
-      "Playbooks with approval workflows",
-      "Dedicated success manager",
-      "Exports, audit logs, and SLA-backed support",
+      "Veículos, rotas e assentos ilimitados",
+      "Permissões avançadas e login via SSO",
+      "Sincronização de dados em duas vias",
+      "Manuais de operação com fluxos de aprovação",
+      "Gerente de sucesso dedicado",
+      "Exportações, logs de auditoria e suporte via SLA",
     ],
-    cta: "Talk to sales",
+    cta: "Falar com gestor",
     buttonVariant: "default",
     isPopular: false,
     bgClass: "bg-base-50 ring-4 ring-base-50",
@@ -86,22 +87,21 @@ const pricingTiers = [
         variant="textSM"
         class="leading-normal font-bold uppercase text-accent-700"
       >
-        pricing
+        preços
       </Text>
       <Text
         tag="h2"
         variant="displayMD"
         class="tracking-tight mt-4 font-semibold text-base-900"
       >
-        CRM pricing for every stage
+        Gestão de frota para cada etapa
       </Text>
       <Text
         tag="p"
         variant="textBase"
         class="mt-4 text-base-500 font-medium text-balance"
       >
-        From founder-led sales to multi-team RevOps, pick the plan that keeps
-        deals moving.
+        Desde o controle inicial pelo fundador até operações logísticas complexas, escolha o plano que mantém sua operação em movimento.
       </Text>
       <div
         aria-labelledby="pricing-toggle"
@@ -118,7 +118,7 @@ const pricingTiers = [
           type="button"
           aria-pressed="true"
         >
-          Monthly
+          Mensal
         </button>
         <button
           id="annual-pricing-button"
@@ -126,7 +126,7 @@ const pricingTiers = [
           type="button"
           aria-pressed="false"
         >
-          Annual
+          Anual
         </button>
       </div>
     </div>
@@ -139,7 +139,7 @@ const pricingTiers = [
             class={`flex flex-col h-full p-1 lg:py-1 rounded-3xl ${tier.bgClass} border border-base-200`}
           >
             <div
-              class={`p-8 ${tier.isPopular ? "bg-white/5" : "bg-white"} rounded-[1.3rem] flex flex-col justify-between`}
+              class={`p-8 ${tier.isPopular ? "bg-blue-900" : "bg-white"} rounded-[1.3rem] flex flex-col justify-between`}
             >
               <div>
                 <div class="flex items-start justify-between w-full">
@@ -193,9 +193,9 @@ const pricingTiers = [
                 <span
                   class={`text-sm font-normal  tracking-normal ${tier.isPopular ? "text-white/70" : "text-base-500"}`}
                 >
-                  <span id={`billing-monthly-${index}`}>/month</span>
+                  <span id={`billing-monthly-${index}`}>/mês</span>
                   <span id={`billing-annual-${index}`} class="hidden">
-                    /annually
+                    /anual
                   </span>
                 </span>
               </Text>
@@ -205,7 +205,7 @@ const pricingTiers = [
                   variant="textSM"
                   class={`font-medium uppercase ${tier.descClass}`}
                 >
-                  {tier.name} plan includes:
+                  O plano {tier.name} inclui:
                 </Text>
                 <ul
                   class={`flex flex-col mt-4 gap-y-3 ${tier.descClass}`}
@@ -235,22 +235,18 @@ const pricingTiers = [
     const togglePricing = (isMonthly) => {
       const activeClass = "text-white";
       const inactiveClasses = ["text-base-500", "hover:text-accent-500"];
-      // Update buttons
       [monthlyBtn, annualBtn].forEach((btn, idx) => {
         const active = idx === 0 ? isMonthly : !isMonthly;
         btn.setAttribute("aria-pressed", active.toString());
         btn.classList.toggle(activeClass, active);
         inactiveClasses.forEach((c) => btn.classList.toggle(c, !active));
       });
-      // Update indicator
       indicator.classList.toggle("translate-x-0", isMonthly);
       indicator.classList.toggle("translate-x-full", !isMonthly);
-      // Update amounts
       document.querySelectorAll('[id^="price-amount-"]').forEach((el) => {
         if (el instanceof HTMLElement)
           el.textContent = el.dataset[isMonthly ? "monthly" : "annual"] || "";
       });
-      // Update labels
       document
         .querySelectorAll('[id^="billing-monthly-"]')
         .forEach((el) => el.classList.toggle("hidden", !isMonthly));
