@@ -33,12 +33,19 @@
         <div v-if="currentView === 'add-vehicle' || currentView === 'addvehicles'">
           <AddVehicles @navigate="handleNavigation" />
         </div>
+        
         <div v-if="currentView === 'drivers'">
           <Drivers @navigate="handleNavigation" />
         </div>
+<div v-if="currentView === 'add-driver'">
+  <AddDriver @navigate="handleNavigation" />
+</div>
+
+<div v-if="currentView === 'licenses'">
+  <DriverLicenses @navigate="handleNavigation" />
+</div>
       </main>
     </div>
-
     <div
       class="drawer-side bg-white dark:bg-backgroundDark border border-gray-200 dark:border-primary/10"
     >
@@ -59,6 +66,8 @@ import AllCategories from "./components/AllCategories.vue";
 import Vehicles from "./components/Vehicles.vue";
 import AddVehicles from "./components/AddVehicles.vue";
 import Drivers from "./components/Drivers.vue"
+import AddDriver from "./components/AddDriver.vue"
+import DriverLicenses from "./components/DriverLicenses.vue";
 
 const isDark = ref(true);
 const currentView = ref("dashboard");

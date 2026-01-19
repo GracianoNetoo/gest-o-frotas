@@ -1,6 +1,4 @@
 <template>
-<div class="card bg-base-100 shadow dark:bg-white/5 dark:backdrop-blur-md dark:[--webkit-backdrop-filter:blur(10px)] dark:border-white/20">
-  <div class="p-6 bg-white rounded-lg shadow-md">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-gray-800">Motoristas Cadastrados</h2>
       <div class="relative">
@@ -49,8 +47,6 @@
         </tbody>
       </table>
     </div>
-  </div>
-</div>
 </template>
 
 <script setup>
