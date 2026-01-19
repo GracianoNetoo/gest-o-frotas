@@ -60,6 +60,9 @@
         <div v-if="currentView === 'settings'">
           <Settings @navigate="handleNavigation" />
         </div>
+        <div v-if="currentView === 'all-reports' || currentView === 'reports'">
+          <AllReports @navigate="handleNavigation" />
+    </div>
       </main>
     </div>
 
@@ -92,6 +95,7 @@ import ScheduledMaintenance from "./components/ScheduledMaintenance.vue";
 import FleetRoutes from "./components/FleetRoutes.vue";
 import FuelConsumption from "./components/FuelConsumption.vue";
 import Settings from "./components/Settings.vue";
+import AllReports from "./components/AllReports.vue";
 
 
 const isDark = ref(true);
