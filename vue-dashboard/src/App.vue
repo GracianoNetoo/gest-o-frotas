@@ -1,7 +1,6 @@
 <template>
   <div class="drawer lg:drawer-open font-display">
     <input type="checkbox" id="my-drawer" class="drawer-toggle" />
-    
     <div class="drawer-content flex flex-col">
       <Navbar
         :isDark="isDark"
@@ -10,9 +9,9 @@
       />
 
       <main class="flex-1 p-6 bg-base-200 dark:bg-backgroundDark transition-colors duration-300">
-        <!--<div class="bg-red-500 text-white p-2">
+        <div class="bg-red-500 text-white p-2">
           View Atual: {{ currentView }}
-      </div>-->
+      </div>
         <div v-if="currentView === 'dashboard'">
           <StatsCards />
           <Charts />
@@ -52,6 +51,15 @@
         <div v-if="currentView === 'scheduled-maintenance'|| currentView === 'scheduledmaintenance'">
           <ScheduledMaintenance @navigate="handleNavigation" />
         </div>
+        <div v-if="currentView === 'routes'|| currentView === 'fleetroutes'">
+          <FleetRoutes @navigate="handleNavigation" />
+        </div>
+        <div v-if="currentView === 'fuel'|| currentView === 'fuelconsumption'">
+          <FuelConsumption @navigate="handleNavigation" />
+        </div>
+        <div v-if="currentView === 'settings'">
+          <Settings @navigate="handleNavigation" />
+        </div>
       </main>
     </div>
 
@@ -81,6 +89,10 @@ import DriverLicenses from "./components/DriverLicenses.vue";
 import ActiveMaintenance from "./components/ActiveMaintenance.vue";
 import MaintenanceHistory from "./components/MaintenanceHistory.vue";
 import ScheduledMaintenance from "./components/ScheduledMaintenance.vue";
+import FleetRoutes from "./components/FleetRoutes.vue";
+import FuelConsumption from "./components/FuelConsumption.vue";
+import Settings from "./components/Settings.vue";
+
 
 const isDark = ref(true);
 const currentView = ref("dashboard");
