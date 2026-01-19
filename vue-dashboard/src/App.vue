@@ -33,6 +33,9 @@
         <div v-if="currentView === 'add-vehicle' || currentView === 'addvehicles'">
           <AddVehicles @navigate="handleNavigation" />
         </div>
+        <div v-if="currentView === 'drivers'">
+          <Drivers @navigate="handleNavigation" />
+        </div>
       </main>
     </div>
 
@@ -55,6 +58,7 @@ import StackBarChart from "./components/StackBarChart.vue";
 import AllCategories from "./components/AllCategories.vue";
 import Vehicles from "./components/Vehicles.vue";
 import AddVehicles from "./components/AddVehicles.vue";
+import Drivers from "./components/Drivers.vue"
 
 const isDark = ref(true);
 const currentView = ref("dashboard");
