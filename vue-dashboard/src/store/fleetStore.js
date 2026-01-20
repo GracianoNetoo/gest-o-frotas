@@ -48,5 +48,23 @@ export const fleetStore = reactive({
 
     saveToStorage() {
         localStorage.setItem('fleet_vehicles', JSON.stringify(this.vehicles));
+    },
+vehicles: JSON.parse(localStorage.getItem('fleet_vehicles')) || [],
+    // 1. Nova lista de motoristas
+    drivers: JSON.parse(localStorage.getItem('fleet_drivers')) || [],
+
+    saveToStorage() {
+        localStorage.setItem('fleet_vehicles', JSON.stringify(this.vehicles));
+        // 2. Salva motoristas também
+        localStorage.setItem('fleet_drivers', JSON.stringify(this.drivers));
+    },
+
+    // 3. Método para adicionar motorista
+    addDriver(driver) {
+        this.drivers.push({
+            id: Date.now(), // ID único para controle
+            ...driver
+        });
+        this.saveToStorage();
     }
 });
