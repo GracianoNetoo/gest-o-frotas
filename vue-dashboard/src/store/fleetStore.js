@@ -49,7 +49,8 @@ export const fleetStore = reactive({
     saveToStorage() {
         localStorage.setItem('fleet_vehicles', JSON.stringify(this.vehicles));
     },
-vehicles: JSON.parse(localStorage.getItem('fleet_vehicles')) || [],
+    
+    vehicles: JSON.parse(localStorage.getItem('fleet_vehicles')) || [],
     // 1. Nova lista de motoristas
     drivers: JSON.parse(localStorage.getItem('fleet_drivers')) || [],
 
@@ -64,6 +65,27 @@ vehicles: JSON.parse(localStorage.getItem('fleet_vehicles')) || [],
         this.drivers.push({
             id: Date.now(), // ID único para controle
             ...driver
+        });
+        this.saveToStorage();
+    },
+    
+    vehicles: JSON.parse(localStorage.getItem('fleet_vehicles')) || [],
+    drivers: JSON.parse(localStorage.getItem('fleet_drivers')) || [],
+    // 1. Nova lista de manutenções
+    maintenances: JSON.parse(localStorage.getItem('fleet_maintenances')) || [],
+
+    saveToStorage() {
+        localStorage.setItem('fleet_vehicles', JSON.stringify(this.vehicles));
+        localStorage.setItem('fleet_drivers', JSON.stringify(this.drivers));
+        // 2. Salva manutenções
+        localStorage.setItem('fleet_maintenances', JSON.stringify(this.maintenances));
+    },
+
+    addMaintenance(record) {
+        this.maintenances.push({
+            id: Date.now(),
+            createdAt: new Date().toISOString(),
+            ...record
         });
         this.saveToStorage();
     }

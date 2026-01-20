@@ -45,6 +45,9 @@
         <div v-if="currentView === 'ongoing-maintenance'">
           <ActiveMaintenance @navigate="handleNavigation" />
         </div>
+        <div v-if="currentView === 'add-maintenance' || currentView === 'addmaintenance'">
+          <AddMaintenance @navigate="handleNavigation" />
+        </div>
         <div v-if="currentView === 'maintenancehistory'|| currentView === 'maintenance-history'">
           <MaintenanceHistory @navigate="handleNavigation" />
         </div>
@@ -96,6 +99,7 @@ import FleetRoutes from "./components/FleetRoutes.vue";
 import FuelConsumption from "./components/FuelConsumption.vue";
 import Settings from "./components/Settings.vue";
 import AllReports from "./components/AllReports.vue";
+import AddMaintenance from "./components/AddMaintenance.vue";
 
 
 const isDark = ref(true);
