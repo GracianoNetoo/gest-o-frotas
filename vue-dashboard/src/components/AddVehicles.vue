@@ -102,19 +102,20 @@
                             <option value="Indisponível">Indisponível</option>
                         </select>
                     </div>
-                    <!-- Chassi -->
+                    
+                    <!-- Quilometragem -->
                     <div class="form-control">
                         <label class="label">
-                            <span class="label-text">Chassi</span>
+                            <span class="label-text">Quilometragem</span>
                         </label>
-                        <input 
-                            type="text"
-                            v-model="formData.chassis"
-                            placeholder="9BWZZZ377VT004251"
-                            class="input input-bordered dark:bg-white/5 dark:border-white/10"
+                        <input
+                        type="number"
+                        v-model="formData.mileage"
+                        placeholder="0"
+                        min="0"
+                        class="input input-bordered dark:bg-white/5 dark:border-white/10"
                         />
                     </div>
-
                     <!-- Cor -->
                     <div class="form-control">
                         <label class="label">
@@ -124,20 +125,6 @@
                             type="text"
                             v-model="formData.color"
                             placeholder="Branco"
-                            class="input input-bordered dark:bg-white/5 dark:border-white/10"
-                        />
-                    </div>
-
-                    <!-- Quilometragem -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Quilometragem</span>
-                        </label>
-                        <input
-                            type="number"
-                            v-model="formData.mileage"
-                            placeholder="0"
-                            min="0"
                             class="input input-bordered dark:bg-white/5 dark:border-white/10"
                         />
                     </div>
@@ -196,7 +183,6 @@ const formData = ref({
     year: new Date().getFullYear(),
     driver: '',
     status: 'Disponível',
-    chassis: '',
     color: '',
     mileage: 0,
     lastMaintenance: '',
@@ -229,7 +215,6 @@ const resetForm = () => {
         year: new Date().getFullYear(),
         driver: '',
         status: 'Disponível',
-        chassis: '',
         color: '',
         mileage: 0,
         lastMaintenance: '',
