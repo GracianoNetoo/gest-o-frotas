@@ -23,32 +23,32 @@
 
         <div class="form-control w-full">
           <label class="label"><span class="label-text dark:text-gray-300">Tipo de Serviço</span></label>
-          <input 
+          <input
             v-model="form.serviceType"
             type="text"
-            placeholder="Ex: Troca de Óleo, Travões..." 
-            class="input input-bordered dark:bg-gray-800 w-full" 
-            required 
+            placeholder="Ex: Troca de Óleo, Travões..."
+            class="input input-bordered dark:bg-gray-800 w-full"
+            required
           />
         </div>
 
         <div class="form-control w-full">
           <label class="label"><span class="label-text dark:text-gray-300">Data Agendada</span></label>
-          <input 
-            v-model="form.plannedDate" 
-            type="date" 
-            class="input input-bordered dark:bg-gray-800 w-full" 
-            required 
+          <input
+            v-model="form.plannedDate"
+            type="date"
+            class="input input-bordered dark:bg-gray-800 w-full"
+            required
           />
         </div>
 
         <div class="form-control w-full">
           <label class="label"><span class="label-text dark:text-gray-300">Oficina / Local</span></label>
-          <input 
-            v-model="form.workshop" 
-            type="text" 
-            placeholder="Nome da oficina" 
-            class="input input-bordered dark:bg-gray-800 w-full" 
+          <input
+            v-model="form.workshop"
+            type="text"
+            placeholder="Nome da oficina"
+            class="input input-bordered dark:bg-gray-800 w-full"
           />
         </div>
         <div class="form-control w-full">
@@ -59,7 +59,7 @@
                 v-model="form.estimatedCost"
                 type="number"
                 placeholder="1.000"
-                class="input input-bordered join-item w-full dark:bg-gray-800 focus:outline-none" 
+                class="input input-bordered join-item w-full dark:bg-gray-800 focus:outline-none"
                 />
             </div>
         </div>
@@ -97,7 +97,7 @@ const handleSubmit = () => {
   fleetStore.addMaintenance({ ...form.value });
 
   alert('Manutenção agendada com sucesso!');
-  
+
   // Volta para a tela de listagem/agenda
   emit('navigate', 'maintenances');
 };
