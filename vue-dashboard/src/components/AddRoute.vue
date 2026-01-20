@@ -9,31 +9,25 @@
 
       <form @submit.prevent="handleSubmit" class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <div class="form-control w-full">
-          <label class="label"><span class="label-text dark:text-gray-300 font-bold">Veículo Disponível</span></label>
-          <select v-model="form.vehiclePlate" class="select select-bordered dark:bg-gray-800 w-full" required>
-            <option disabled value="">Selecione um veículo</option>
-            <option v-for="v in availableVehicles" :key="v.plate" :value="v.plate">
-              {{ v.plate }} - {{ v.model }}
-            </option>
-          </select>
-          <label class="label" v-if="availableVehicles.length === 0">
-            <span class="label-text-alt text-error font-semibold">⚠️ Nenhum veículo disponível para uso.</span>
-          </label>
-        </div>
+       <div class="form-control w-full">
+  <label class="label"><span class="label-text dark:text-gray-300 font-bold">Veículo Disponível</span></label>
+  <select v-model="form.vehiclePlate" class="select select-bordered dark:bg-gray-800 w-full" required>
+    <option disabled value="">Selecione um veículo</option>
+    <option v-for="v in availableVehicles" :key="v.plate" :value="v.plate">
+      {{ v.plate }} - {{ v.model }}
+    </option>
+  </select>
+</div>
 
-        <div class="form-control w-full">
-          <label class="label"><span class="label-text dark:text-gray-300 font-bold">Motorista Habilitado</span></label>
-          <select v-model="form.driverName" class="select select-bordered dark:bg-gray-800 w-full" required>
-            <option disabled value="">Selecione um motorista</option>
-            <option v-for="d in qualifiedDrivers" :key="d.id" :value="d.name">
-              {{ d.name }} (Cat: {{ d.category }})
-            </option>
-          </select>
-          <label class="label" v-if="qualifiedDrivers.length === 0">
-            <span class="label-text-alt text-error font-semibold">⚠️ Nenhum motorista com licença ativa.</span>
-          </label>
-        </div>
+<div class="form-control w-full">
+  <label class="label"><span class="label-text dark:text-gray-300 font-bold">Motorista Habilitado</span></label>
+  <select v-model="form.driverName" class="select select-bordered dark:bg-gray-800 w-full" required>
+    <option disabled value="">Selecione um motorista</option>
+    <option v-for="d in qualifiedDrivers" :key="d.id" :value="d.name">
+      {{ d.name }}
+    </option>
+  </select>
+</div>
 
         <div class="form-control w-full">
           <label class="label"><span class="label-text dark:text-gray-300">Ponto de Origem</span></label>
@@ -74,14 +68,20 @@ const form = ref({
 });
 
 
+// 1. Filtrar veículos (Mostra se for 'Disponível' ou se não tiver status definido ainda)
+// Filtra apenas VEÍCULOS
 const availableVehicles = computed(() => {
-  return (fleetStore.vehicles || []).filter(v => v.status === 'Disponível');
+  return (fleetStore.vehicles || []).filter(v => {
+    const s = v.status ? v.status.toLowerCase() : '';
+    return s === 'disponível' || s === ''; 
+  });
 });
 
+// Filtra apenas MOTORISTAS
 const qualifiedDrivers = computed(() => {
   return (fleetStore.drivers || []).filter(d => {
-
-    return d.status === 'Ativa' || d.status === 'Alerta' || !d.status;
+    const s = d.status ? d.status.toLowerCase() : '';
+    return s === 'ativa' || s === 'alerta' || s === '';
   });
 });
 
