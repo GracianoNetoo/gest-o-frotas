@@ -57,6 +57,9 @@
         <div v-if="currentView === 'routes'|| currentView === 'fleetroutes'">
           <FleetRoutes @navigate="handleNavigation" />
         </div>
+        <div v-if="currentView === 'add-route'|| currentView === 'addroute'">
+          <AddRoute @navigate="handleNavigation" />
+        </div>
         <div v-if="currentView === 'fuel'|| currentView === 'fuelconsumption'">
           <FuelConsumption @navigate="handleNavigation" />
         </div>
@@ -100,6 +103,7 @@ import FuelConsumption from "./components/FuelConsumption.vue";
 import Settings from "./components/Settings.vue";
 import AllReports from "./components/AllReports.vue";
 import AddMaintenance from "./components/AddMaintenance.vue";
+import AddRoute from "./components/AddRoute.vue";
 
 
 const isDark = ref(true);

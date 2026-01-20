@@ -68,17 +68,22 @@ export const fleetStore = reactive({
         });
         this.saveToStorage();
     },
-    
+
     vehicles: JSON.parse(localStorage.getItem('fleet_vehicles')) || [],
     drivers: JSON.parse(localStorage.getItem('fleet_drivers')) || [],
-    // 1. Nova lista de manutenções
+    routes: JSON.parse(localStorage.getItem('fleet_routes')) || [],
     maintenances: JSON.parse(localStorage.getItem('fleet_maintenances')) || [],
 
     saveToStorage() {
         localStorage.setItem('fleet_vehicles', JSON.stringify(this.vehicles));
         localStorage.setItem('fleet_drivers', JSON.stringify(this.drivers));
-        // 2. Salva manutenções
+        localStorage.setItem('fleet_routes', JSON.stringify(this.routes));
         localStorage.setItem('fleet_maintenances', JSON.stringify(this.maintenances));
+    },
+
+    addRoute(route) {
+        this.routes.push({ id: Date.now(), ...route });
+        this.saveToStorage();
     },
 
     addMaintenance(record) {
