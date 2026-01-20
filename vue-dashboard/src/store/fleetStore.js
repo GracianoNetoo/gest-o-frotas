@@ -1,6 +1,7 @@
 import { reactive, computed } from 'vue';
 
 // 1. Lógica do localStorage (Fora do objeto)
+
 const savedVehicles = localStorage.getItem('fleet_vehicles');
 const initialVehicles = savedVehicles ? JSON.parse(savedVehicles) : [
     { id: 1, plate: 'ABC-1234', model: 'Ford Ranger', status: 'Em Uso', category: 'Caminhões' },
@@ -105,5 +106,5 @@ export const fleetStore = reactive({
     this.fuelLogs.push({ id: Date.now(), ...entry });
     this.saveToStorage();
     },
-    
+
 });

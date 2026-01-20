@@ -69,6 +69,9 @@
         <div v-if="currentView === 'all-reports' || currentView === 'reports'">
           <AllReports @navigate="handleNavigation" />
     </div>
+        <div v-if="currentView === 'image-upload' || currentView === 'imageupload'">
+          <ImageUpload @navigate="handleNavigation" />
+    </div>
       </main>
     </div>
 
@@ -104,6 +107,7 @@ import Settings from "./components/Settings.vue";
 import AllReports from "./components/AllReports.vue";
 import AddMaintenance from "./components/AddMaintenance.vue";
 import AddRoute from "./components/AddRoute.vue";
+import ImageUpload from "./components/ImageUpload.vue";
 
 
 const isDark = ref(true);
