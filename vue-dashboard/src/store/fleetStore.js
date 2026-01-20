@@ -93,5 +93,17 @@ export const fleetStore = reactive({
             ...record
         });
         this.saveToStorage();
-    }
+    },
+    fuelLogs: JSON.parse(localStorage.getItem('fleet_fuel')) || [],
+    addFuelEntry(entry) {
+    this.fuelLogs.push({ id: Date.now(), ...entry });
+    this.saveToStorage();
+    },
+    
+    fuelLogs: JSON.parse(localStorage.getItem('fleet_fuel')) || [],
+    addFuelEntry(entry) {
+    this.fuelLogs.push({ id: Date.now(), ...entry });
+    this.saveToStorage();
+    },
+    
 });
