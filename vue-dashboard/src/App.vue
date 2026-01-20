@@ -132,4 +132,16 @@ const handleNavigation = (view) => {
     drawer.checked = false;
   }
 };
+
+import { watch } from "vue";
+import { fleetStore } from "./store/fleetStore";
+
+// Observa qualquer mudança profunda na lista de veículos e salva
+watch(
+  () => fleetStore.vehicles,
+  (newVehicles) => {
+    localStorage.setItem('fleet_vehicles', JSON.stringify(newVehicles));
+  },
+  { deep: true }
+);
 </script>

@@ -185,7 +185,7 @@
 <script setup>
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
-import { fleetStore } from '../store/fleetStore'; // Importe a sua store aqui
+import { fleetStore } from '../store/fleetStore';
 
 const emit = defineEmits(['navigate']);
 
@@ -204,14 +204,40 @@ const formData = ref({
 });
 
 const handleSubmit = () => {
-    // 1. Chame a função da store passando os dados do formulário
-    fleetStore.addVehicle({ ...formData.value });
-    // 2. Opcional: Feedback visual
-    console.log('Veículo cadastrado na store:', formData.value);
-    // 3. Navegação e Limpeza
-    resetForm();
-    emit('navigate', 'vehicles'); // Volta para a lista de veículos
+    if (!formData.value.plate || !formData.value.model || !formData.value.category) {
+        alert('Por favor, preencha a placa, o modelo e a categoria.');
+        return;
+    }
+
+    try {
+        // Chamada oficial para a Store
+        fleetStore.addVehicle({ ...formData.value });
+        console.log("Veículo adicionado com sucesso!");
+        emit('navigate', 'vehicles'); // Navega para a lista
+    } catch (error) {
+        console.error("Erro ao salvar veículo:", error);
+        alert("Erro técnico ao salvar. Verifique o console.");
+    }
 };
 
-// ... restante do seu código (resetForm e goBack)
+// ESSAS FUNÇÕES ESTAVAM FALTANDO NO SEU SCRIPT:
+const resetForm = () => {
+    formData.value = {
+        plate: '',
+        model: '',
+        category: '',
+        year: new Date().getFullYear(),
+        driver: '',
+        status: 'Disponível',
+        chassis: '',
+        color: '',
+        mileage: 0,
+        lastMaintenance: '',
+        notes: ''
+    };
+};
+
+const goBack = () => {
+    emit('navigate', 'dashboard'); // Ou 'vehicles'
+};
 </script>
