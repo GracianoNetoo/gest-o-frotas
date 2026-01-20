@@ -185,6 +185,7 @@
 <script setup>
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
+import { fleetStore } from '../store/fleetStore'; // Importe a sua store aqui
 
 const emit = defineEmits(['navigate']);
 
@@ -203,32 +204,14 @@ const formData = ref({
 });
 
 const handleSubmit = () => {
-    console.log('Salvando veículo:', formData.value);
-    // Aqui você pode adicionar a lógica para salvar o veículo
-    alert('Veículo cadastrado com sucesso!');
-    // Limpar formulário ou navegar de volta
+    // 1. Chame a função da store passando os dados do formulário
+    fleetStore.addVehicle({ ...formData.value });
+    // 2. Opcional: Feedback visual
+    console.log('Veículo cadastrado na store:', formData.value);
+    // 3. Navegação e Limpeza
     resetForm();
-    emit('navigate', 'vehicles');
+    emit('navigate', 'vehicles'); // Volta para a lista de veículos
 };
 
-const resetForm = () => {
-    formData.value = {
-        plate: '',
-        model: '',
-        category: '',
-        year: new Date().getFullYear(),
-        driver: '',
-        status: 'Disponível',
-        chassis: '',
-        color: '',
-        mileage: 0,
-        lastMaintenance: '',
-        notes: ''
-    };
-};
-
-const goBack = () => {
-    emit('navigate', 'vehicles');
-};
+// ... restante do seu código (resetForm e goBack)
 </script>
-
