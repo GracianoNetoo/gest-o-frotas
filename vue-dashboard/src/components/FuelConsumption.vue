@@ -17,7 +17,7 @@
             <tr>
               <th>Veículo</th>
               <th>Média Atual</th>
-              <th>Total Gasto ($)</th>
+              <th>Total Gasto (KZ)</th>
               <th>Status de Eficiência</th>
             </tr>
           </thead>
@@ -28,7 +28,7 @@
                 <div class="text-xs opacity-50">{{ vehicle.plate }}</div>
               </td>
               <td class="font-mono">{{ vehicle.average }} km/L</td>
-              <td class="font-mono text-secondary font-bold">${{ vehicle.totalCost }}</td>
+              <td class="font-mono text-secondary font-bold">KZ {{ vehicle.totalCost }}</td>
               <td>
                 <div :class="getEfficiencyColor(vehicle.average, vehicle.type)" class="flex items-center gap-1 font-semibold">
                   <Icon :icon="getEfficiencyIcon(vehicle.average, vehicle.type)" />
@@ -39,7 +39,7 @@
           </tbody>
         </table>
       </div>
-      
+
       <div v-if="fuelAnalysis.length === 0" class="text-center py-8 opacity-50">
         Nenhum dado de combustível registado para os veículos atuais.
       </div>
@@ -58,7 +58,7 @@ const fuelAnalysis = computed(() => {
     // Aqui buscaríamos os dados reais de fuelLogs filtrados por placa
     // Por enquanto, vamos gerar uma média simulada baseada no modelo
     const isHeavy = v.model.toLowerCase().includes('scania') || v.model.toLowerCase().includes('volvo');
-    
+
     return {
       plate: v.plate,
       model: v.model,
@@ -85,4 +85,5 @@ const getEfficiencyIcon = (avg, type) => {
 };
 
 const openFuelModal = () => alert("Módulo de registo de abastecimento em desenvolvimento.");
+
 </script>

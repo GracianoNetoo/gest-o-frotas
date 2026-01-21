@@ -58,12 +58,11 @@
                 <input
                 v-model="form.estimatedCost"
                 type="number"
-                placeholder="1.000"
                 class="input input-bordered join-item w-full dark:bg-gray-800 focus:outline-none"
                 />
+                <span class="join-iten btn btn-disbled dark:bg-gray-800 focus-ring text-md font-black text-info">1.000</span>
             </div>
         </div>
-
         <div class="md:col-span-2 mt-4 flex justify-end gap-3">
           <button type="button" @click="$emit('navigate', 'maintenances')" class="btn btn-ghost dark:text-gray-300">Cancelar</button>
           <button type="submit" class="btn btn-info px-8 text-white">
@@ -93,12 +92,23 @@ const form = ref({
 });
 
 const handleSubmit = () => {
-  // Adiciona à lista de manutenções na Store
-  fleetStore.addMaintenance({ ...form.value });
+  // Certifica-se de que pegamos o valor exatamente como digitado, sem multiplicações escondidas
+  const valorDigitado = parseFloat(form.value.estimatedCost) || 0;
 
-  alert('Manutenção agendada com sucesso!');
+  const maintenanceData = {
+    ...form.value,
+    id: Date.now(),
+    estimatedCost: valorDigitado, // SALVA O VALOR REAL
+    status: 'Agendada'
+  };
 
-  // Volta para a tela de listagem/agenda
-  emit('navigate', 'maintenances');
+  fleetStore.addMaintenance(maintenanceData);
+
+  // Atualiza o veículo
+  const veiculo = fleetStore.vehicles.find(v => v.plate === form.value.vehiclePlate);
+  if (veiculo) veiculo.status = 'Manutenção';
+
+  fleetStore.saveToStorage();
+  emit('navigate', 'maintenancehistory');
 };
 </script>

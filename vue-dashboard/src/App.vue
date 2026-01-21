@@ -3,9 +3,10 @@
     <input type="checkbox" id="my-drawer" class="drawer-toggle" />
     <div class="drawer-content flex flex-col">
       <Navbar
-        :isDark="isDark"
-        @toggle-drawer="toggleDrawer"
-        @toggle-theme="toggleTheme"
+      :isDark="isDark" 
+      @toggle-theme="toggleTheme" 
+      @toggle-drawer="isDrawerOpen = !isDrawerOpen"
+      @navigate="currentPage = $event"
       />
 
       <main class="flex-1 p-6 bg-base-200 dark:bg-backgroundDark transition-colors duration-300">

@@ -31,10 +31,12 @@
             </div>
         </div>
 
-        <div @click="$emit('navigate', 'maintenance')" 
+        <div @click="$emit('navigate', 'maintenancehistory')" 
              class="card bg-base-100 dark:bg-white/5 shadow-xl cursor-pointer hover:scale-105 border border-transparent hover:border-success transition-all group">
             <div class="card-body items-center text-center relative">
-                <div class="badge badge-success text-white absolute top-4 right-4">KZ {{ totalMaintenanceCost }}</div>
+                <div class="badge badge-success text-white absolute top-4 right-4">
+                   KZ {{ formatCurrency(totalMaintenanceCost) }}
+                </div>
                 <Icon icon="mdi:history" class="text-4xl text-success group-hover:scale-110 transition-transform" />
                 <h2 class="card-title">Manutenções</h2>
                 <p class="text-xs text-gray-500">Custo total acumulado</p>
@@ -82,23 +84,18 @@ import { fleetStore } from '../store/fleetStore';
 
 defineEmits(['navigate']);
 
-// 1. Contador de Rotas Ativas (Certifique-se de que o status é exatamente 'Em Execução')
 const activeRoutesCount = computed(() =>
     (fleetStore.routes || []).filter(r => r.status === 'Em Execução').length
 );
 
-// 2. Média Global (Simulada)
 const fleetAverageKmL = computed(() => 4.2);
 
-// 3. Custos de Manutenção
+// Calcula o custo total (Soma agendadas e concluídas)
 const totalMaintenanceCost = computed(() => {
-    const total = (fleetStore.maintenances || [])
-        .filter(m => m.status === 'Concluída')
+    return (fleetStore.maintenances || [])
         .reduce((sum, m) => sum + parseFloat(m.estimatedCost || 0), 0);
-    return total.toLocaleString('pt-BR');
 });
 
-// 4. Status dos Veículos (Atenção ao status 'Em Uso')
 const vehiclesInMaintenance = computed(() =>
     (fleetStore.vehicles || []).filter(v => v.status === 'Manutenção').length
 );
@@ -106,6 +103,15 @@ const vehiclesInMaintenance = computed(() =>
 const vehiclesAvailable = computed(() =>
     (fleetStore.vehicles || []).filter(v => v.status === 'Disponível').length
 );
+
+// Função de formatação Kwanza
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat('pt-AO', {
+    style: 'decimal',
+    minimumFractionDigits: 0, // Para o dashboard, números inteiros costumam ser mais limpos
+    maximumFractionDigits: 0
+  }).format(value || 0);
+};
 
 const generateFullPDF = () => {
     alert("Gerando relatório consolidado em PDF...");

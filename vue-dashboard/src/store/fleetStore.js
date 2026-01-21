@@ -50,15 +50,18 @@ export const fleetStore = reactive({
     saveToStorage() {
         localStorage.setItem('fleet_vehicles', JSON.stringify(this.vehicles));
     },
-    
+
     vehicles: JSON.parse(localStorage.getItem('fleet_vehicles')) || [],
     // 1. Nova lista de motoristas
     drivers: JSON.parse(localStorage.getItem('fleet_drivers')) || [],
 
     saveToStorage() {
         localStorage.setItem('fleet_vehicles', JSON.stringify(this.vehicles));
-        // 2. Salva motoristas também
+        localStorage.setItem('settings_user_name', userName.value);
+        localStorage.setItem('settings_user_photo', userPhoto.value);
         localStorage.setItem('fleet_drivers', JSON.stringify(this.drivers));
+        window.dispatchEvent(new Event('storage'));
+        alert("Configurações salvas com sucesso!");
     },
 
     // 3. Método para adicionar motorista
@@ -100,7 +103,7 @@ export const fleetStore = reactive({
     this.fuelLogs.push({ id: Date.now(), ...entry });
     this.saveToStorage();
     },
-    
+
     fuelLogs: JSON.parse(localStorage.getItem('fleet_fuel')) || [],
     addFuelEntry(entry) {
     this.fuelLogs.push({ id: Date.now(), ...entry });

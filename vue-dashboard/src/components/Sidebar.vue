@@ -9,7 +9,9 @@
     aria-label="Main navigation"
   >
     <header class="mb-4 flex p-4">
-      <h1 class="text-xl font-bold dark:text-white">Gestão de Frotas</h1>
+      <h1 class="text-3xl font-bold dark:text-white">
+        <span class={className} {...rest}>Drive</span><span class="text-[30px] text-blue-500 font-bold">on</span>
+      </h1>
     </header>
     <ul role="menu">
       <li

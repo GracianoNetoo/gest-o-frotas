@@ -52,7 +52,7 @@
 
         <ul
           tabindex="0"
-          class="mt-4 z-[1] p-2 shadow-2xl menu menu-sm dropdown-content bg-base-100 dark:bg-gray-800 rounded-box w-52 space-y-1 border dark:border-white/10"
+          class="mt-4 z-1 p-2 shadow-2xl menu menu-sm dropdown-content bg-base-100 dark:bg-gray-800 rounded-box w-52 space-y-1 border dark:border-white/10"
         >
           <div class="px-4 py-2 border-b dark:border-white/5 mb-1 md:hidden">
              <p class="font-bold text-xs uppercase opacity-50">Usuário</p>

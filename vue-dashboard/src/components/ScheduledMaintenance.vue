@@ -76,4 +76,6 @@ const startMaintenance = (item) => {
     fleetStore.saveToStorage();
     alert('Manutenção iniciada!');
 };
+
+
 </script>
