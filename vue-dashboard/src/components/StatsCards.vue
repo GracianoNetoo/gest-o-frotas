@@ -85,6 +85,6 @@ const getDescClass = (stat) => {
   // Se está a descer em outros casos
   if (stat.trend === "↙") return "text-blue-500";
 
-  return "text-gray-400 opacity-80"; // Padrão
+  return "text-gray-400 opacity-80";
 };
 </script>
