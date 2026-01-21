@@ -78,14 +78,20 @@
                         <select
                             v-model="formData.driver"
                             class="select select-bordered dark:bg-white/5 dark:border-white/10"
-                        >
-                            <option value="">Sem motorista atribuído</option>
-                            <option value="João Silva">João Silva</option>
-                            <option value="Maria Santos">Maria Santos</option>
-                            <option value="Pedro Costa">Pedro Costa</option>
-                            <option value="Ana Oliveira">Ana Oliveira</option>
-                        </select>
-                    </div>
+                            >
+                        <option value="">Sem motorista atribuído</option>
+                        <option 
+            v-for="driver in fleetStore.drivers" 
+            :key="driver.id" 
+            :value="driver.name"
+        >
+            {{ driver.name }}
+        </option>
+    </select>
+    <label v-if="fleetStore.drivers.length === 0" class="label">
+        <span class="label-text-alt text-warning">Nenhum motorista cadastrado!</span>
+    </label>
+</div>
                     <!-- Status -->
                     <div class="form-control">
                         <label class="label">
