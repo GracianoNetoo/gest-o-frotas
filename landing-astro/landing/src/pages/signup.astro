@@ -54,7 +54,20 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
                 />
               </div>
             </div>
-
+            <div>
+  <label class="text-sm text-base-500 font-medium">Palavra-passe</label>
+  <div class="mt-1.5">
+    <input
+      type="password"
+      name="password"
+      id="password"
+      placeholder="••••••••"
+      required
+      minlength="6"
+      class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 placeholder-base-400 focus:ring-accent-700 focus:outline-none focus:ring-2 sm:text-sm"
+    />
+  </div>
+</div>
             <div>
               <label class="text-sm text-base-500 font-medium">Nome da Transportadora/Empresa</label>
               <div class="mt-1.5">
@@ -120,3 +133,14 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
     </Wrapper>
   </section>
 </BaseLayout>
+<script>
+async function handleLogin() {
+  // ... sua lógica de fetch ...
+  const data = { token: 'seu_jwt_aqui' }; // Exemplo
+
+  if (data.token) {
+    // Redireciona passando o token na URL
+    window.location.href = `http://localhost:5173/dashboard?token=${data.token}`;
+  }
+}
+</script>

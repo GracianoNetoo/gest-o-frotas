@@ -111,3 +111,21 @@ export const fleetStore = reactive({
     },
 
 });
+
+// Exemplo no App.vue do Vue
+import { onMounted, ref } from 'vue';
+
+const user = ref(null);
+
+onMounted(() => {
+  const savedUser = localStorage.getItem('user_auth');
+  
+  if (savedUser) {
+    user.value = JSON.parse(savedUser);
+    console.log(`Bem-vindo, ${user.value.name} da empresa ${user.value.company}`);
+  } else {
+    // Se alguém tentar acessar o dashboard sem cadastro/login
+    // ele é expulso de volta para o cadastro no Astro
+    window.location.href = 'http://localhost:4321/signup'; 
+  }
+});

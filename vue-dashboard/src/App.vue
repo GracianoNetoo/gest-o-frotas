@@ -3,16 +3,13 @@
     <input type="checkbox" id="my-drawer" class="drawer-toggle" />
     <div class="drawer-content flex flex-col">
       <Navbar
-      :isDark="isDark" 
-      @toggle-theme="toggleTheme" 
+      :isDark="isDark"
+      @toggle-theme="toggleTheme"
       @toggle-drawer="isDrawerOpen = !isDrawerOpen"
       @navigate="currentPage = $event"
       />
 
       <main class="flex-1 p-6 bg-base-200 dark:bg-backgroundDark transition-colors duration-300">
-        <div class="bg-red-500 text-white p-2">
-          View Atual: {{ currentView }}
-      </div>
         <div v-if="currentView === 'dashboard'">
           <StatsCards />
           <Charts />
@@ -115,14 +112,24 @@ const isDark = ref(true);
 const currentView = ref("dashboard");
 
 onMounted(() => {
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme) {
-    isDark.value = savedTheme === "dark";
-  } else {
-    isDark.value = window.matchMedia("(prefers-color-scheme:dark)").matches;
-  }
-});
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token');
 
+  if (token) {
+    // 1. Salva no LocalStorage do projeto Vue (porta 5173)
+    localStorage.setItem('auth_token', token);
+    
+    // 2. Limpa a URL para ficar bonita (remove o ?token=...)
+    window.history.replaceState({}, document.title, "/dashboard");
+    
+    console.log("Login realizado com sucesso no Dashboard!");
+  } else {
+    // 3. Se não tem token na URL nem no LocalStorage, volta pro Astro
+    const savedToken = localStorage.getItem('auth_token');
+    if (!savedToken) {
+      window.location.href = "http://localhost:4321/login?";
+    }
+  }
 watchEffect(() => {
   const theme = isDark.value ? "dark" : "light";
   document.documentElement.setAttribute("data-theme", theme);
@@ -131,11 +138,6 @@ watchEffect(() => {
 
 const toggleTheme = () => {
   isDark.value = !isDark.value;
-};
-
-const toggleDrawer = () => {
-  const drawer = document.getElementById("my-drawer");
-  if (drawer) drawer.checked = !drawer.checked;
 };
 
 const handleNavigation = (view) => {
@@ -147,7 +149,7 @@ const handleNavigation = (view) => {
 };
 
 import { watch } from "vue";
-import { fleetStore } from "./store/fleetStore";
+import { fleetStore } from "./store/fleetStore.js";
 
 // Observa qualquer mudança profunda na lista de veículos e salva
 watch(
@@ -158,5 +160,23 @@ watch(
   { deep: true }
 );
 
+// Função simples para ler cookies
+const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+// No Navigation Guard do Vue Router
+router.beforeEach((to, from, next) => {
+  const token = getCookie('auth_token');
+
+  if (to.meta.requiresAuth && !token) {
+    // Se não tem token, manda de volta para o site em Astro
+    window.location.href = "http://localhost:4321/login";
+  } else {
+    next();
+  }
+});
 
 </script>

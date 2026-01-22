@@ -1,5 +1,5 @@
 ---
-// Fundations
+// Foundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
@@ -10,69 +10,49 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
   <section>
     <Wrapper variant="standard" class="py-20">
       <div class="max-w-sm mx-auto">
-        <Text
-          tag="h1"
-          variant="displaySM"
-          class="tracking-tight font-semibold text-base-900"
-        >
+        <Text tag="h1" variant="displaySM" class="tracking-tight font-semibold text-base-900">
           Inicie sessão com a sua conta.
         </Text>
-        <Text
-          tag="p"
-          variant="textBase"
-          class="mt-4 text-base-500 font-medium text-balance"
-        >
+        <Text tag="p" variant="textBase" class="mt-4 text-base-500 font-medium text-balance">
           Bem vindo de volta! Por favor, insira seus dados para fazer login.
         </Text>
-        <form action="#" method="POST" class="mx-auto mt-12 max-w-sm">
+
+        <form id="login-form" class="mx-auto mt-12 max-w-sm">
           <div class="flex flex-col gap-y-6">
             <div>
               <label class="text-sm text-base-500 font-medium"> Email </label>
               <div class="mt-2.5">
                 <input
                   type="email"
-                  name="email"
                   id="email"
-                  autocomplete="email"
                   required
-                  aria-required="true"
-                  aria-describedby="email-error"
-                  class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 placeholder-base-400 focus:border-base-300 focus:bg-transparent focus:outline-none focus:ring-accent-700 focus:ring-offset-2 focus:ring-2 sm:text-sm"
+                  placeholder="exemplo@email.com"
+                  class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 focus:ring-accent-700 focus:outline-none focus:ring-2 sm:text-sm"
                 />
-                <span id="email-error" class="text-red-600 text-sm hidden">
-                  Insira um endereço de e-mail válido.
-                </span>
               </div>
             </div>
             <div>
-              <label class="text-sm text-base-500 font-medium">
-                Palavra-passe
-              </label>
+              <label class="text-sm text-base-500 font-medium"> Palavra-passe </label>
               <div class="mt-2.5">
                 <input
                   type="password"
-                  name="password"
                   id="password"
-                  autocomplete="current-password"
                   required
-                  aria-required="true"
-                  aria-describedby="password-error"
-                  class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 placeholder-base-400 focus:border-base-300 focus:bg-transparent focus:outline-none focus:ring-accent-700 focus:ring-offset-2 focus:ring-2 sm:text-sm"
+                  class="block w-full h-10 px-4 py-2 text-sm text-accent-700 duration-300 bg-white border border-transparent rounded-lg appearance-none ring-1 ring-base-200 focus:ring-accent-700 focus:outline-none focus:ring-2 sm:text-sm"
                 />
-                <span id="password-error" class="text-red-600 text-sm hidden">
-                Por favor insera a sua palavra-passe
-                </span>
               </div>
             </div>
           </div>
-          <Button variant="default" size="base" class="mt-8 w-full">
+
+          <Button type="submit" variant="default" size="base" class="mt-8 w-full">
             Entrar
           </Button>
+
           <div class="flex items-center mt-4">
             <Text tag="p" variant="textSM" class="text-base-500">
               Não tem uma conta?
-              <a class="text-accent-700 hover:text-base-500" href="/signup">
-              Inscrever-se
+              <a class="text-accent-700 hover:text-base-500 font-semibold" href="/signup">
+                Inscrever-se
               </a>
             </Text>
           </div>
@@ -81,3 +61,6 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
     </Wrapper>
   </section>
 </BaseLayout>
+<script>
+
+</script>

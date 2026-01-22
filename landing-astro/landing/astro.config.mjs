@@ -1,10 +1,12 @@
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import vue from '@astrojs/vue';
-import tailwindcss from '@tailwindcss/vite'; // Use este em vez de @astrojs/tailwind
+import node from '@astrojs/node'; // ou vercel/netlify
 
 export default defineConfig({
+  output: 'server', // Essencial para SSR e proteção de rotas
   integrations: [vue()],
-  vite: {
-    plugins: [tailwindcss()], // O Tailwind v4 roda direto pelo Vite
-  },
+  adapter: node({
+    mode: 'standalone',
+  }),
 });
