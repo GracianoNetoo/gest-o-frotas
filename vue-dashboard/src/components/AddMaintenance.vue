@@ -82,33 +82,45 @@ import { fleetStore } from '../store/fleetStore';
 
 const emit = defineEmits(['navigate']);
 
+// 1. Definição Única do Formulário (Sincronizado com os v-model do seu HTML)
 const form = ref({
   vehiclePlate: '',
   serviceType: '',
   plannedDate: '',
   workshop: '',
   estimatedCost: 0,
-  status: 'Agendada' // Status inicial padrão
+  status: 'Agendada',
+  description: ''
 });
 
 const handleSubmit = () => {
-  // Certifica-se de que pegamos o valor exatamente como digitado, sem multiplicações escondidas
-  const valorDigitado = parseFloat(form.value.estimatedCost) || 0;
+  try {
+    // 2. Preparar os dados para salvar
+    const maintenanceData = {
+      ...form.ref, // Pega todos os campos do formulário
+      id: Date.now(),
+      date: new Date().toISOString()
+    };
 
-  const maintenanceData = {
-    ...form.value,
-    id: Date.now(),
-    estimatedCost: valorDigitado, // SALVA O VALOR REAL
-    status: 'Agendada'
-  };
+    // 3. Adicionar à lista de manutenções no Store
+    fleetStore.addMaintenance(maintenanceData);
 
-  fleetStore.addMaintenance(maintenanceData);
+    // 4. Lógica de Atualização do Status do Veículo
+    // Procuramos o veículo pela placa para mudar o status dele automaticamente
+    const veiculo = fleetStore.vehicles.find(v => v.plate === form.value.vehiclePlate);
+    if (veiculo) {
+      veiculo.status = 'Manutenção';
+    }
 
-  // Atualiza o veículo
-  const veiculo = fleetStore.vehicles.find(v => v.plate === form.value.vehiclePlate);
-  if (veiculo) veiculo.status = 'Manutenção';
-
-  fleetStore.saveToStorage();
-  emit('navigate', 'maintenancehistory');
+    // 5. Feedback e Navegação
+    alert("Manutenção registrada com sucesso!");
+    
+    // Verifique se o nome da view no App.vue é exatamente este:
+    emit('navigate', 'maintenance-history'); 
+    
+  } catch (error) {
+    console.error("Erro ao salvar manutenção:", error);
+    alert("Erro ao salvar. Verifique o console.");
+  }
 };
 </script>

@@ -9,7 +9,6 @@
             </div>
             <form @submit.prevent="handleSubmit" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Placa -->
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Placa *</span>
@@ -23,7 +22,6 @@
                         />
                     </div>
 
-                    <!-- Modelo -->
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Modelo *</span>
@@ -37,7 +35,6 @@
                         />
                     </div>
 
-                    <!-- Categoria -->
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Categoria *</span>
@@ -55,7 +52,6 @@
                         </select>
                     </div>
 
-                    <!-- Ano -->
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Ano *</span>
@@ -70,7 +66,6 @@
                             required
                         />
                     </div>
-                    <!-- Motorista -->
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Motorista</span>
@@ -81,18 +76,17 @@
                             >
                         <option value="">Sem motorista atribuído</option>
                         <option 
-            v-for="driver in fleetStore.drivers" 
-            :key="driver.id" 
-            :value="driver.name"
-        >
-            {{ driver.name }}
-        </option>
-    </select>
-    <label v-if="fleetStore.drivers.length === 0" class="label">
-        <span class="label-text-alt text-warning">Nenhum motorista cadastrado!</span>
-    </label>
-</div>
-                    <!-- Status -->
+                            v-for="driver in fleetStore.drivers" 
+                            :key="driver.id" 
+                            :value="driver.name"
+                        >
+                            {{ driver.name }}
+                        </option>
+                    </select>
+                    <label v-if="fleetStore.drivers.length === 0" class="label">
+                        <span class="label-text-alt text-warning">Nenhum motorista cadastrado!</span>
+                    </label>
+                </div>
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Status *</span>
@@ -109,7 +103,6 @@
                         </select>
                     </div>
                     
-                    <!-- Quilometragem -->
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Quilometragem</span>
@@ -122,20 +115,7 @@
                         class="input input-bordered dark:bg-white/5 dark:border-white/10"
                         />
                     </div>
-                    <!-- Cor -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Cor</span>
-                        </label>
-                        <input
-                            type="text"
-                            v-model="formData.color"
-                            placeholder="Branco"
-                            class="input input-bordered dark:bg-white/5 dark:border-white/10"
-                        />
-                    </div>
 
-                    <!-- Última Manutenção -->
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Data da Última Manutenção</span>
@@ -148,24 +128,11 @@
                     </div>
                 </div>
 
-                <!-- Observações -->
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">Observações</span>
-                    </label>
-                    <textarea
-                        v-model="formData.notes"
-                        class="textarea textarea-bordered h-24 dark:bg-white/5 dark:border-white/10"
-                        placeholder="Adicione observações sobre o veículo..."
-                    ></textarea>
-                </div>
-
-                <!-- Botões de ação -->
                 <div class="flex justify-end gap-4 mt-6">
                     <button type="button" @click="goBack" class="btn btn-ghost">
                         Cancelar
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary text-white">
                         <Icon icon="line-md:check" class="w-5 h-5 mr-1"/>
                         Salvar Veículo
                     </button>
@@ -195,40 +162,20 @@ const formData = ref({
     notes: ''
 });
 
-const handleSubmit = () => {
-    if (!formData.value.plate || !formData.value.model || !formData.value.category) {
-        alert('Por favor, preencha a placa, o modelo e a categoria.');
-        return;
-    }
-
+const handleSubmit = async () => {
     try {
-        // Chamada oficial para a Store
-        fleetStore.addVehicle({ ...formData.value });
+        // Envia os dados do formulário para o Supabase através da store
+        await fleetStore.addVehicle({ ...formData.value });
+        
         console.log("Veículo adicionado com sucesso!");
-        emit('navigate', 'vehicles'); // Navega para a lista
+        emit('navigate', 'vehicles');
     } catch (error) {
         console.error("Erro ao salvar veículo:", error);
-        alert("Erro técnico ao salvar. Verifique o console.");
+        alert("Erro técnico ao salvar no Supabase. Verifique o console.");
     }
-};
-
-// ESSAS FUNÇÕES ESTAVAM FALTANDO NO SEU SCRIPT:
-const resetForm = () => {
-    formData.value = {
-        plate: '',
-        model: '',
-        category: '',
-        year: new Date().getFullYear(),
-        driver: '',
-        status: 'Disponível',
-        color: '',
-        mileage: 0,
-        lastMaintenance: '',
-        notes: ''
-    };
 };
 
 const goBack = () => {
-    emit('navigate', 'dashboard'); // Ou 'vehicles'
+    emit('navigate', 'vehicles');
 };
 </script>

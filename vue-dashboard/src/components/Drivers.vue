@@ -115,7 +115,18 @@ const statusClass = (status) => {
     }
 };
 
-const formatDate = (date) => date ? new Date(date).toLocaleDateString('pt-BR') : 'N/D';
+// Dentro do <script setup> do seu Drivers.vue
+const formatDate = (dateString) => {
+    if (!dateString) return 'Data não definida';
+    
+    // Tenta converter a string para data
+    const date = new Date(dateString);
+    
+    // Verifica se a data é válida
+    if (isNaN(date.getTime())) return 'Data inválida';
+    
+    return date.toLocaleDateString('pt-PT'); // Formato DD/MM/AAAA
+};
 
 const getDaysRemaining = (expiryDate) => {
     if (!expiryDate) return 0;

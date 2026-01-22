@@ -1,15 +1,17 @@
 <template>
-  <div class="drawer lg:drawer-open font-display">
+  <Login v-if="!fleetStore.isLoggedIn" />
+
+  <div v-else class="drawer lg:drawer-open font-display">
     <input type="checkbox" id="my-drawer" class="drawer-toggle" />
-    <div class="drawer-content flex flex-col">
+    
+    <div class="drawer-content flex flex-col min-h-screen">
       <Navbar
-      :isDark="isDark"
-      @toggle-theme="toggleTheme"
-      @toggle-drawer="isDrawerOpen = !isDrawerOpen"
-      @navigate="currentPage = $event"
+        :isDark="isDark" 
+        @toggle-theme="toggleTheme"
+        @navigate="handleNavigation"
       />
 
-      <main class="flex-1 p-6 bg-base-200 dark:bg-backgroundDark transition-colors duration-300">
+      <main class="flex-1 p-6 bg-base-200 dark:bg-[#0f172a] transition-colors duration-300">
         <div v-if="currentView === 'dashboard'">
           <StatsCards />
           <Charts />
@@ -20,56 +22,40 @@
           <StackBarChart class="lg:col-span-1 mt-6" />
         </div>
 
-        <div v-if="currentView === 'categories'">
-          <AllCategories />
-        </div>
+        <div v-if="currentView === 'categories'"><AllCategories /></div>
+        
         <div v-if="currentView === 'vehicles'">
           <Vehicles @navigate="handleNavigation" />
         </div>
-        <div v-if="currentView === 'add-vehicle' || currentView === 'addvehicles'">
+        
+        <div v-if="['add-vehicle', 'addvehicles'].includes(currentView)">
           <AddVehicles @navigate="handleNavigation" />
         </div>
 
         <div v-if="currentView === 'drivers'">
           <Drivers @navigate="handleNavigation" />
         </div>
-        <div v-if="currentView === 'add-driver' || currentView === 'adddriver'">
+        
+        <div v-if="['add-driver', 'adddriver'].includes(currentView)">
           <AddDriver @navigate="handleNavigation" />
         </div>
-        <div v-if="currentView === 'licenses' || currentView === 'driverlicenses'">
+
+        <div v-if="['licenses', 'driverlicenses'].includes(currentView)">
           <DriverLicenses @navigate="handleNavigation" />
         </div>
 
-        <div v-if="currentView === 'ongoing-maintenance'">
-          <ActiveMaintenance @navigate="handleNavigation" />
-        </div>
-        <div v-if="currentView === 'add-maintenance' || currentView === 'addmaintenance'">
-          <AddMaintenance @navigate="handleNavigation" />
-        </div>
-        <div v-if="currentView === 'maintenancehistory'|| currentView === 'maintenance-history'">
-          <MaintenanceHistory @navigate="handleNavigation" />
-        </div>
-        <div v-if="currentView === 'scheduled-maintenance'|| currentView === 'scheduledmaintenance'">
-          <ScheduledMaintenance @navigate="handleNavigation" />
-        </div>
-        <div v-if="currentView === 'routes'|| currentView === 'fleetroutes'">
-          <FleetRoutes @navigate="handleNavigation" />
-        </div>
-        <div v-if="currentView === 'add-route'|| currentView === 'addroute'">
-          <AddRoute @navigate="handleNavigation" />
-        </div>
-        <div v-if="currentView === 'fuel'|| currentView === 'fuelconsumption'">
-          <FuelConsumption @navigate="handleNavigation" />
-        </div>
-        <div v-if="currentView === 'settings'">
-          <Settings @navigate="handleNavigation" />
-        </div>
-        <div v-if="currentView === 'all-reports' || currentView === 'reports'">
-          <AllReports @navigate="handleNavigation" />
-    </div>
-        <div v-if="currentView === 'image-upload' || currentView === 'imageupload'">
-          <ImageUpload @navigate="handleNavigation" />
-    </div>
+        <div v-if="currentView === 'ongoing-maintenance'"><ActiveMaintenance @navigate="handleNavigation" /></div>
+        <div v-if="['add-maintenance', 'addmaintenance'].includes(currentView)"><AddMaintenance @navigate="handleNavigation" /></div>
+        <div v-if="['maintenancehistory', 'maintenance-history'].includes(currentView)"><MaintenanceHistory @navigate="handleNavigation" /></div>
+        <div v-if="['scheduled-maintenance', 'scheduledmaintenance'].includes(currentView)"><ScheduledMaintenance @navigate="handleNavigation" /></div>
+        
+        <div v-if="['routes', 'fleetroutes'].includes(currentView)"><FleetRoutes @navigate="handleNavigation" /></div>
+        <div v-if="['add-route', 'addroute'].includes(currentView)"><AddRoute @navigate="handleNavigation" /></div>
+        
+        <div v-if="['fuel', 'fuelconsumption'].includes(currentView)"><FuelConsumption @navigate="handleNavigation" /></div>
+        <div v-if="currentView === 'settings'"><Settings @navigate="handleNavigation" /></div>
+        <div v-if="['all-reports', 'reports'].includes(currentView)"><AllReports @navigate="handleNavigation" /></div>
+        <div v-if="['image-upload', 'imageupload'].includes(currentView)"><ImageUpload @navigate="handleNavigation" /></div>
       </main>
     </div>
 
@@ -81,8 +67,11 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watchEffect } from "vue";
-// Importações de componentes...
+import { onMounted, ref, watchEffect, watch } from "vue";
+import { fleetStore } from "./store/fleetStore.js";
+
+// Importações dos componentes
+import Login from "./components/Login.vue";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
 import StatsCards from "./components/StatsCards.vue";
@@ -107,76 +96,34 @@ import AddMaintenance from "./components/AddMaintenance.vue";
 import AddRoute from "./components/AddRoute.vue";
 import ImageUpload from "./components/ImageUpload.vue";
 
-
 const isDark = ref(true);
 const currentView = ref("dashboard");
 
 onMounted(() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get('token');
-
-  if (token) {
-    // 1. Salva no LocalStorage do projeto Vue (porta 5173)
-    localStorage.setItem('auth_token', token);
-    
-    // 2. Limpa a URL para ficar bonita (remove o ?token=...)
-    window.history.replaceState({}, document.title, "/dashboard");
-    
-    console.log("Login realizado com sucesso no Dashboard!");
-  } else {
-    // 3. Se não tem token na URL nem no LocalStorage, volta pro Astro
-    const savedToken = localStorage.getItem('auth_token');
-    if (!savedToken) {
-      window.location.href = "http://localhost:4321/login?";
-    }
+  // Tema
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    isDark.value = savedTheme === "dark";
   }
+});
+
 watchEffect(() => {
   const theme = isDark.value ? "dark" : "light";
   document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.classList.toggle('dark', isDark.value);
   localStorage.setItem("theme", theme);
 });
 
-const toggleTheme = () => {
-  isDark.value = !isDark.value;
-};
+const toggleTheme = () => isDark.value = !isDark.value;
 
 const handleNavigation = (view) => {
   currentView.value = view;
   const drawer = document.getElementById("my-drawer");
-  if (drawer && window.innerWidth < 1024) {
-    drawer.checked = false;
-  }
+  if (drawer && window.innerWidth < 1024) drawer.checked = false;
 };
 
-import { watch } from "vue";
-import { fleetStore } from "./store/fleetStore.js";
-
-// Observa qualquer mudança profunda na lista de veículos e salva
-watch(
-  () => fleetStore.vehicles,
-  (newVehicles) => {
-    localStorage.setItem('fleet_vehicles', JSON.stringify(newVehicles));
-  },
-  { deep: true }
-);
-
-// Função simples para ler cookies
-const getCookie = (name) => {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-// No Navigation Guard do Vue Router
-router.beforeEach((to, from, next) => {
-  const token = getCookie('auth_token');
-
-  if (to.meta.requiresAuth && !token) {
-    // Se não tem token, manda de volta para o site em Astro
-    window.location.href = "http://localhost:4321/login";
-  } else {
-    next();
-  }
-});
-
+// Persistência LocalStorage para todas as listas principais
+watch(() => fleetStore.vehicles, (val) => localStorage.setItem('fleet_vehicles', JSON.stringify(val)), { deep: true });
+watch(() => fleetStore.drivers, (val) => localStorage.setItem('fleet_drivers', JSON.stringify(val)), { deep: true });
+watch(() => fleetStore.routes, (val) => localStorage.setItem('fleet_routes', JSON.stringify(val)), { deep: true });
 </script>

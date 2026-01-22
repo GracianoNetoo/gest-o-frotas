@@ -42,14 +42,12 @@ import { fleetStore } from '../store/fleetStore';
 
 const activities = computed(() => {
   const allEvents = [];
-
-  // 1. Eventos de Veículos (Novos Cadastros)
   (fleetStore.vehicles || []).forEach(v => {
     allEvents.push({
       id: `v-${v.plate}`,
       title: 'Frota Atualizada',
       description: `Veículo ${v.plate} (${v.model}) adicionado.`,
-      time: 'Recente', // Idealmente usar v.createdAt se existir
+      time: 'Recente', 
       timestamp: Date.now() - 10000, 
       icon: 'line-md:car',
       iconClass: 'text-blue-500',
@@ -57,7 +55,6 @@ const activities = computed(() => {
     });
   });
 
-  // 2. Eventos de Manutenção
   (fleetStore.maintenances || []).forEach(m => {
     const isDone = m.status === 'Concluída';
     allEvents.push({
@@ -72,7 +69,6 @@ const activities = computed(() => {
     });
   });
 
-  // 3. Eventos de Motoristas
   (fleetStore.drivers || []).forEach(d => {
     allEvents.push({
       id: `d-${d.id}`,
@@ -86,7 +82,6 @@ const activities = computed(() => {
     });
   });
 
-  // Ordenar por data (mais recente primeiro) e limitar a 6 itens
   return allEvents
     .sort((a, b) => b.timestamp - a.timestamp)
     .slice(0, 6);

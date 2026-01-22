@@ -58,10 +58,11 @@
              <p class="font-bold text-xs uppercase opacity-50">Usuário</p>
              <p class="truncate">{{ userName }}</p>
           </div>
-          <li><a @click="$emit('navigate', 'settings')"><Icon icon="mdi:account-outline" /> Perfil</a></li>
           <li><a @click="$emit('navigate', 'settings')"><Icon icon="mdi:cog-outline" /> Configurações</a></li>
           <div class="divider my-0 opacity-20"></div>
-          <li><a class="text-error"><Icon icon="mdi:logout" /> Terminar sessão</a></li>
+         <li>
+          <a @click="fleetStore.logout()" class="text-error">
+            <Icon icon="mdi:logout" />Terminar sessão</a></li>
         </ul>
       </div>
     </section>
@@ -97,4 +98,10 @@ onMounted(() => {
   // Listener para caso o usuário mude o perfil em outra aba ou componente
   window.addEventListener('storage', loadUserData);
 });
+
+const handleLogout = () => {
+  if (confirm("Deseja realmente sair do sistema?")) {
+    fleetStore.logout();
+  }
+};
 </script>
